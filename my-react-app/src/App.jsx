@@ -1,19 +1,21 @@
-import Header from "./Header.jsx";
-import Footer from "./Footer.jsx";
-import Game from "./Game.jsx";
-import Card from "./Card.jsx";
+import Header from './components/common/Header/Header';
+import Footer from './components/common/Footer/Footer';
+import GameGrid from './components/features/GameGrid/GameGrid';
+import { useGames } from './hooks/useGames';
+import './styles/index.css';
 
 function App() {
-  return (
-    <div>
-      <Header />
-      <Game />
-      <Card />
-      <Footer />
+  const { games, loading, error } = useGames({ pageSize: 20 });
 
+  return (
+    <div className="app">
+      <Header />
+      <main className="main-content">
+        <GameGrid games={games} loading={loading} error={error} />
+      </main>
+      <Footer />
     </div>
-    
   );
 }
 
-export default App
+export default App;
